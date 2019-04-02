@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <ImageButton
         android:id="@+id/trolejbusy"
-        android:layout_width="250dp"
-        android:layout_height="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:background="@android:drawable/screen_background_light_transparent"
         android:cropToPadding="false"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/trolejbusy" />
+        android:src="@drawable/trolejbus"
+        app:layout_constraintBottom_toTopOf="@+id/autobusy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/autobusy"
-        android:layout_width="250dp"
-        android:layout_height="170dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="212dp"
-        android:layout_marginEnd="25dp"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/autobusy" />
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/autobusy"
+        app:layout_constraintBottom_toTopOf="@+id/technickeVozidla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trolejbusy"
+        app:layout_constraintVertical_bias="0.875" />
 
     <ImageButton
         android:id="@+id/technickeVozidla"
-        android:layout_width="250dp"
-        android:layout_height="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginBottom="52dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:background="@android:drawable/screen_background_light_transparent"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/technicke_vozidla" />
-</RelativeLayout>
+        android:src="@drawable/ine_vozidla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autobusy" />
+
+</android.support.constraint.ConstraintLayout>
