@@ -1,5 +1,6 @@
 package com.example.evidenciamhd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -58,6 +59,11 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
                 System.out.println(mapka);
 
                 Toast.makeText(TrolejbusVyhladavanie.this, evcArrayList.get(position).getEvc(), Toast.LENGTH_SHORT).show();
+
+                //startActivity(new Intent(TrolejbusVyhladavanie.this, InformacieOVozidle.class));
+                Intent intent = new Intent(TrolejbusVyhladavanie.this, InformacieOVozidle.class);
+                intent.putExtra("mapka",mapka);
+                startActivity(intent);
             }
         });
     }
