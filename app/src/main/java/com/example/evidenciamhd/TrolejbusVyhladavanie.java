@@ -48,6 +48,8 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
         editsearch = (SearchView) findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
 
+        //ci funguje git
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
