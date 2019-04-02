@@ -18,12 +18,29 @@ public class VyberTypu extends AppCompatActivity {
         setContentView(R.layout.vyber_typu);
 
         buttonTrolejbusy= findViewById(R.id.trolejbusy);
+        buttonAutobusy= findViewById(R.id.autobusy);
+        buttonIne= findViewById(R.id.technickeVozidla);
 
         buttonTrolejbusy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
+                 }
+        });
+
+        /*buttonAutobusy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(VyberTypu.this, .class));
             }
-    });
+        });
+
+        buttonIne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(VyberTypu.this, .class));
+            }
+        });*/
+
     }
 }
