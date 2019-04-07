@@ -4,10 +4,37 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textMHD"
+        android:id="@+id/ecv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="81dp"
+        android:layout_marginBottom="207dp"
+        android:text="Button" />
+
+    <TextView
+        android:id="@+id/stk"
+        android:layout_width="83dp"
+        android:layout_height="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="534dp"
+        android:text="stk" />
+
+    <EditText
+        android:id="@+id/typ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="462dp"
+        android:text="typ" />
+
 </RelativeLayout>

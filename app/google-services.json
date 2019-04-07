@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "419093789164",
+    "firebase_url": "https://evidenciamhdapp.firebaseio.com",
+    "project_id": "evidenciamhdapp",
+    "storage_bucket": "evidenciamhdapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419093789164:android:d0a284ae2524eb0b",
+        "android_client_info": {
+          "package_name": "com.example.evidenciamhd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "419093789164-i6j2b4gk0vlh7n30tgfcq8942rp8f7a6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.evidenciamhd",
+            "certificate_hash": "84ce9068f3c5c13e8430c914921a16fd808c68c5"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBJQGwYEE1hIiVP-x6IPfQKbR5nmjiH2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "419093789164-pblg7gq6pope1nfldji6jd374mt72tj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
