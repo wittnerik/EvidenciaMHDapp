@@ -49,7 +49,7 @@ public class InformacieOVozidle extends AppCompatActivity {
 
         mapka = getIntent().getExtras().getInt("mapka");
 
-        //setValues();
+       // setValues();
         datePicker();
 
         ecv.setText(String.valueOf(mapka));
@@ -66,7 +66,6 @@ public class InformacieOVozidle extends AppCompatActivity {
                 vozidlo.setStk(gstk);
 
                 reff.child(String.valueOf(mapka)).setValue(vozidlo);
-
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
             }
         });
@@ -81,10 +80,11 @@ public class InformacieOVozidle extends AppCompatActivity {
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String styp = dataSnapshot.child("evc").getValue().toString();
-                String sspz = dataSnapshot.child("spz").getValue().toString();
+                String styp = dataSnapshot.child("typ").getValue().toString();
+                String sstk = dataSnapshot.child("stk").getValue().toString();
 
                 typ.setText(styp);
+                stk.setText(sstk);
             }
 
             @Override
