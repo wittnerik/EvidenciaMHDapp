@@ -49,7 +49,7 @@ public class InformacieOVozidle extends AppCompatActivity {
 
         mapka = getIntent().getExtras().getInt("mapka");
 
-       // setValues();
+        setValues();
         datePicker();
 
         ecv.setText(String.valueOf(mapka));
