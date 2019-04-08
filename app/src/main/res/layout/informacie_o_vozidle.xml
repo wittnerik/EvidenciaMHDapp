@@ -1,13 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light">
 
     <TextView
-        android:id="@+id/textMHD"
+        android:id="@+id/nazovMHD"
+        android:layout_width="wrap_content"
+        android:layout_height="43dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MHD" />
+
+    <ImageButton
+        android:id="@+id/MHD"
+        android:layout_width="409dp"
+        android:layout_height="215dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/mhd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Id"
+        android:layout_width="337dp"
+        android:layout_height="153dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="226dp"
+        android:background="@android:color/transparent"
+        android:text="Najvac ppc mhd v celej strednej europe"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nazovMHD"
+        app:layout_constraintVertical_bias="0.0"></EditText>
+
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
-</RelativeLayout>
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="44dp"
+        android:background="@drawable/round_button"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Save changes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="44dp"
+        android:text="Delete"
+
+        android:background="@drawable/round_button_red"
+        android:gravity="center_vertical|center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button" />
+
+</android.support.constraint.ConstraintLayout>
