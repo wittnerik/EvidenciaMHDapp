@@ -65,7 +65,7 @@ public class InformacieOVozidle extends AppCompatActivity {
                 vozidlo.setTyp(gtyp);
                 vozidlo.setStk(gstk);
 
-                reff.child(String.valueOf(mapka)).setValue(vozidlo);
+                reff.setValue(vozidlo, String.valueOf(vozidlo.getEvc()));
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
             }
         });
@@ -95,7 +95,7 @@ public class InformacieOVozidle extends AppCompatActivity {
     }
 
     public void datePicker(){
-        stk = (TextView) findViewById(R.id.stk);
+        stk = findViewById(R.id.stk);
         stk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
