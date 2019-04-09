@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/trolejbus" />
+        app:srcCompat="@drawable/t709" />
 
     <TextView
         android:id="@+id/nadpis"
@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="126dp"
-        android:text="Evidencia vozidiel MHD"
+        android:text="EV MHD APP"
         android:textAlignment="textStart"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"

@@ -11,8 +11,8 @@
         android:id="@+id/ecv"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
 
     <EditText
         android:id="@+id/typ"
-        android:layout_width="337dp"
+        android:layout_width="317dp"
         android:layout_height="153dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -63,10 +63,10 @@
         android:layout_height="48dp"
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="44dp"
-        android:text="Delete"
-
         android:background="@drawable/round_button_red"
+
         android:gravity="center_vertical|center_horizontal"
+        android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button" />
@@ -84,5 +84,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typ" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="231dp"
+        android:text="EVČ:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Typ:"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="344dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="STK"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="471dp" />
 
 </android.support.constraint.ConstraintLayout>
