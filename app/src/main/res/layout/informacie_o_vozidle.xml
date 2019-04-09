@@ -8,7 +8,7 @@
     android:background="@android:color/background_light">
 
     <TextView
-        android:id="@+id/nazovMHD"
+        android:id="@+id/ecv"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
         android:layout_marginStart="152dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Id"
+        android:id="@+id/typ"
         android:layout_width="337dp"
         android:layout_height="153dp"
         android:layout_marginStart="16dp"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nazovMHD"
+        app:layout_constraintTop_toBottomOf="@+id/ecv"
         app:layout_constraintVertical_bias="0.0"></EditText>
 
     <Button
@@ -54,11 +54,11 @@
         android:gravity="center_vertical|center_horizontal"
         android:text="Save changes"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginEnd="18dp"
@@ -70,5 +70,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/stk"
+        android:layout_width="154dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="144dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typ" />
 
 </android.support.constraint.ConstraintLayout>
