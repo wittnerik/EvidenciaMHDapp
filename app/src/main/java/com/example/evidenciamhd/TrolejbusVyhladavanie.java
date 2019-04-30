@@ -24,7 +24,7 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trolejbusy_vzhladavanie);
 
-        EvcList = new String[]{"732", "733", "734", "735", "736"};
+        EvcList = new String[]{"711", "708", "709"};
 
 
         list = (ListView) findViewById(R.id.listview);

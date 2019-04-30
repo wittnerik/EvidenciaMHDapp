@@ -3,15 +3,12 @@ package com.example.evidenciamhd;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,8 +16,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +38,6 @@ public class InformacieOVozidle extends AppCompatActivity {
     private EditText typ;
     public ImageButton MHD;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    private String userChoosenTask;
     Button button, buttonDelete;
     DatabaseReference reff;
     Vozidlo vozidlo;
@@ -54,7 +48,6 @@ public class InformacieOVozidle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informacie_o_vozidle);
-        Context c =getApplicationContext();
         ecv=findViewById(R.id.ecv);
         MHD = findViewById(R.id.MHD);
         mapka = getIntent().getExtras().getInt("mapka");
@@ -70,8 +63,9 @@ public class InformacieOVozidle extends AppCompatActivity {
         typ = findViewById(R.id.typ);
         stk = findViewById(R.id.stk);
         button = findViewById(R.id.button);
+        buttonDelete = findViewById(R.id.buttonDelete);
         vozidlo = new Vozidlo();
-        FirebaseApp.initializeApp(this);
+        FirebaseApp.initializeApp(this); 
         reff = FirebaseDatabase.getInstance().getReference().child("Vozidlo");
 
         setValues();
@@ -92,6 +86,24 @@ public class InformacieOVozidle extends AppCompatActivity {
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
             }
         });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ecv.setText("");
+                typ.setText("");
+                stk.setText("");
+
+
+                reff = FirebaseDatabase.getInstance().getReference()
+                        .child("Vozidlo").child(String.valueOf(mapka));
+                reff.removeValue();
+                System.out.println("odstranene");
+
+                Toast.makeText(InformacieOVozidle.this, "Odstranene", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     public void setValues(){
@@ -99,11 +111,17 @@ public class InformacieOVozidle extends AppCompatActivity {
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String styp = dataSnapshot.child("typ").getValue().toString();
-                String sstk = dataSnapshot.child("stk").getValue().toString();
+                if(!dataSnapshot.child("evc").exists()){
+                    Intent intent = new Intent(InformacieOVozidle.this, TrolejbusVyhladavanie.class);
+                    startActivity(intent);
 
-                typ.setText(styp);
-                stk.setText(sstk);
+                }else {
+                    String styp = dataSnapshot.child("typ").getValue().toString();
+                    String sstk = dataSnapshot.child("stk").getValue().toString();
+
+                    typ.setText(styp);
+                    stk.setText(sstk);
+                }
             }
 
             @Override
@@ -151,6 +169,7 @@ public class InformacieOVozidle extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int item) {
 
 
+                String userChoosenTask;
                 if (items[item].equals("Odfotiť")) {
                     userChoosenTask ="Odfotiť";
                         cameraIntent();
@@ -232,6 +251,4 @@ public class InformacieOVozidle extends AppCompatActivity {
 
         MHD.setImageBitmap(bm);
     }
-
-
 }
