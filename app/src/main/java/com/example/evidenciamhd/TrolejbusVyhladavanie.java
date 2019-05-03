@@ -2,12 +2,20 @@ package com.example.evidenciamhd;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -17,48 +25,56 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     private ListViewAdapter adapter;
     private SearchView editsearch;
     private String[] EvcList;
-    public static ArrayList<EVC> evcArrayList = new ArrayList<EVC>();
+    private DatabaseReference reff;
+    private Vozidlo vozidlo;
+    public static ArrayList<Integer> vozidloArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trolejbusy_vzhladavanie);
 
-        EvcList = new String[]{"711", "708", "709"};
-
-
-        list = (ListView) findViewById(R.id.listview);
-
-        evcArrayList = new ArrayList<>();
-
-        for (int i = 0; i < EvcList.length; i++) {
-            EVC movieNames = new EVC(EvcList[i]);
-            // Binds all strings into an array
-            evcArrayList.add(movieNames);
-        }
+        FirebaseApp.initializeApp(this);
+        reff = FirebaseDatabase.getInstance().getReference("Vozidlo");
+        vozidlo = new Vozidlo();
+        list =  findViewById(R.id.listview);
+        vozidloArrayList = new ArrayList<>();;
 
         // Pass results to ListViewAdapter Class
         adapter = new ListViewAdapter(this);
 
-        // Binds the Adapter to the ListView
-        list.setAdapter(adapter);
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()){
+                    vozidlo = ds.getValue(Vozidlo.class);
+                    vozidloArrayList.add(vozidlo.getEvc());
+                    System.out.println(vozidlo.getEvc());
+
+                    list.setAdapter(adapter);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         // Locate the EditText in listview_main.xml
-        editsearch = (SearchView) findViewById(R.id.search);
+        editsearch = findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
-
-        //ci funguje git
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                int mapka=Integer.parseInt(evcArrayList.get(position).getEvc().toString());
+                int mapka=vozidloArrayList.get(position).intValue();
                 System.out.println(mapka);
 
-                Toast.makeText(TrolejbusVyhladavanie.this, evcArrayList.get(position).getEvc(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TrolejbusVyhladavanie.this, "" + vozidloArrayList.get(position), Toast.LENGTH_SHORT).show();
 
-                //startActivity(new Intent(TrolejbusVyhladavanie.this, InformacieOVozidle.class));
                 Intent intent = new Intent(TrolejbusVyhladavanie.this, InformacieOVozidle.class);
                 intent.putExtra("mapka",mapka);
                 startActivity(intent);
@@ -75,7 +91,6 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     @Override
     public boolean onQueryTextChange(String newText) {
         String text = newText;
-        adapter.filter(text);
         return false;
     }
 }

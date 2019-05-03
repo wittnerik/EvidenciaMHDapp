@@ -38,8 +38,8 @@ public class InformacieOVozidle extends AppCompatActivity {
     private EditText typ;
     public ImageButton MHD;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    Button button, buttonDelete;
-    DatabaseReference reff;
+    private Button button, buttonDelete;
+    private DatabaseReference reff;
     Vozidlo vozidlo;
     int mapka;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -65,8 +65,7 @@ public class InformacieOVozidle extends AppCompatActivity {
         button = findViewById(R.id.button);
         buttonDelete = findViewById(R.id.buttonDelete);
         vozidlo = new Vozidlo();
-        FirebaseApp.initializeApp(this); 
-        reff = FirebaseDatabase.getInstance().getReference().child("Vozidlo");
+        FirebaseApp.initializeApp(this);
 
         setValues();
         datePicker();

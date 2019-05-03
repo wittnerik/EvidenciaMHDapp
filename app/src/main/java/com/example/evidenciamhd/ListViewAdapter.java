@@ -16,13 +16,13 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private ArrayList<EVC> arraylist;
+    private ArrayList<Integer> arraylist;
 
     public ListViewAdapter(Context context) {
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<EVC>();
-        this.arraylist.addAll(TrolejbusVyhladavanie.evcArrayList);
+        this.arraylist = new ArrayList<>();
+        this.arraylist.addAll(TrolejbusVyhladavanie.vozidloArrayList);
     }
 
     public class ViewHolder {
@@ -31,12 +31,14 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return TrolejbusVyhladavanie.evcArrayList.size();
+        System.out.println("size: " + TrolejbusVyhladavanie.vozidloArrayList.size());
+        return TrolejbusVyhladavanie.vozidloArrayList.size();
+
     }
 
     @Override
-    public EVC getItem(int position) {
-        return TrolejbusVyhladavanie.evcArrayList.get(position);
+    public Integer getItem(int position) {
+        return TrolejbusVyhladavanie.vozidloArrayList.get(position).intValue();
     }
 
     @Override
@@ -49,27 +51,27 @@ public class ListViewAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.listview_item, null);
-            // Locate the TextViews in listview_item.xml
-            holder.name = (TextView) view.findViewById(R.id.name);
+            holder.name =  view.findViewById(R.id.name);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.name.setText(TrolejbusVyhladavanie.evcArrayList.get(position).getEvc());
+        holder.name.setText("" + TrolejbusVyhladavanie.vozidloArrayList.get(position));
         return view;
     }
 
     // Filter Class
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        TrolejbusVyhladavanie.evcArrayList.clear();
+        TrolejbusVyhladavanie.vozidloArrayList.clear();
         if (charText.length() == 0) {
-            TrolejbusVyhladavanie.evcArrayList.addAll(arraylist);
+            TrolejbusVyhladavanie.vozidloArrayList.addAll(arraylist);
         } else {
-            for (EVC wp : arraylist) {
-                if (wp.getEvc().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    TrolejbusVyhladavanie.evcArrayList.add(wp);
+            for (int wp : arraylist) {
+                String sp = String.valueOf(wp);
+                if (sp.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    TrolejbusVyhladavanie.vozidloArrayList.add(wp);
                 }
             }
         }
