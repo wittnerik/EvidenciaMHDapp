@@ -9,21 +9,24 @@
 
     <TextView
         android:id="@+id/ecv"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="120dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="160dp"
         android:text="TextView"
-        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MHD" />
 
     <ImageButton
         android:id="@+id/MHD"
-        android:layout_width="414dp"
-        android:layout_height="225dp"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginEnd="8dp"
-        android:background="@android:drawable/screen_background_light_transparent"
+        android:background="@android:drawable/alert_dark_frame"
         android:scaleType="fitXY"
         android:src="@drawable/mhd"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,90 +36,134 @@
 
     <EditText
         android:id="@+id/typ"
-        android:layout_width="317dp"
-        android:layout_height="153dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="226dp"
-        android:background="@android:color/transparent"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/editbox_background"
         android:text="Najvac ppc mhd v celej strednej europe"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ecv"
-        app:layout_constraintVertical_bias="0.0"></EditText>
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"></EditText>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="44dp"
-        android:background="@drawable/round_button"
+        android:layout_width="113dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/btn_default_small"
+        android:backgroundTint="@android:color/holo_green_light"
         android:gravity="center_vertical|center_horizontal"
-        android:text="Save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="44dp"
-        android:background="@drawable/round_button_red"
-
-        android:gravity="center_vertical|center_horizontal"
-        android:text="Delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button" />
-
-    <TextView
-        android:id="@+id/stk"
-        android:layout_width="154dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="121dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="144dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Uložiť"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/typ" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="30dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="16dp"
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="113dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="89dp"
         android:layout_marginTop="32dp"
-        android:text="EVČ:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MHD" />
+
+        android:layout_marginEnd="88dp"
+        android:background="@android:drawable/btn_default_small"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Zmazať"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/typ" />
+
+    <EditText
+        android:id="@+id/stk"
+        android:layout_width="180dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/edit_text"
+        android:text="12/08/2016"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/ecv"></EditText>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="180dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/editbox_background"
+        android:text="111/1"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/stk" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:text="Typ:"
+        android:layout_marginTop="32dp"
+        android:text="Typ Vozidla:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="90dp"
-        android:text="STK"
+        android:layout_marginTop="24dp"
+        android:text="Koniec STK:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/ecv" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Turnus:"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/pencil"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="9dp"
+        android:background="@android:drawable/ic_menu_edit"
+        android:backgroundTint="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/typ"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <TextView
+        android:id="@+id/pencil2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="9dp"
+        android:background="@android:drawable/ic_menu_edit"
+        android:backgroundTint="@android:color/background_dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/stk"
+        app:layout_constraintTop_toBottomOf="@+id/ecv" />
 
 </android.support.constraint.ConstraintLayout>
