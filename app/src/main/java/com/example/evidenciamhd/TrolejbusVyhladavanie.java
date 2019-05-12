@@ -29,6 +29,8 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     private Vozidlo vozidlo;
     public static ArrayList<Integer> vozidloArrayList = new ArrayList<>();
 
+    int mhd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,9 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
 
         editsearch = findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
+        mhd = getIntent().getExtras().getInt("mhd");
+
+        System.out.println("mhd "+mhd);
 
 
         reff.addValueEventListener(new ValueEventListener() {
@@ -49,7 +54,25 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     vozidlo = ds.getValue(Vozidlo.class);
-                    vozidloArrayList.add(vozidlo.getEvc());
+                    if(mhd==2) {
+                        if (vozidlo.getEvc()>300&&vozidlo.getEvc()<400){
+                            vozidloArrayList.add(vozidlo.getEvc());
+                        }
+
+
+                    }
+                    if (mhd==1){
+                        if(vozidlo.getEvc()<=123||vozidlo.getEvc()>=701&&vozidlo.getEvc()<=736){
+                            vozidloArrayList.add(vozidlo.getEvc());
+                        }
+                    }
+                    if(mhd==3){
+                        if(vozidlo.getEvc()>=9000){
+                            vozidloArrayList.add(vozidlo.getEvc());
+                        }
+                    }
+                    //vozidloArrayList.add(vozidlo.getEvc());
+                    System.out.println(vozidlo.getEvc());
                     System.out.println(vozidlo.getEvc());
 
                     // Pass results to ListViewAdapter Class

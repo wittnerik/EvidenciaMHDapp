@@ -25,23 +25,35 @@ public class VyberTypu extends AppCompatActivity {
         buttonTrolejbusy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
-                 }
+                // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
+                int mhd=1;
+                Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
+                intent.putExtra("mhd",mhd);
+                startActivity(intent);
+            }
         });
 
-        /*buttonAutobusy.setOnClickListener(new View.OnClickListener() {
+        buttonAutobusy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(VyberTypu.this, .class));
+                // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
+                int mhd=2;
+                Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
+                intent.putExtra("mhd",mhd);
+                startActivity(intent);
             }
         });
 
         buttonIne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(VyberTypu.this, .class));
+                // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
+                int mhd=3;
+                Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
+                intent.putExtra("mhd",mhd);
+                startActivity(intent);
             }
-        });*/
+        });
 
     }
 }
