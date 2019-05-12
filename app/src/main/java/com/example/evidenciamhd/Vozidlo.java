@@ -4,6 +4,15 @@ public class Vozidlo {
     private int evc;
     private String typ;
     private String stk;
+    private String turnus;
+
+    public String getTurnus() {
+        return turnus;
+    }
+
+    public void setTurnus(String turnus) {
+        this.turnus = turnus;
+    }
 
     public String getTyp() {
         return typ;

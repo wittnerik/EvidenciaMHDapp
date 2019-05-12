@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class InformacieOVozidle extends AppCompatActivity {
-    private TextView ecv, stk;
+    private TextView ecv, stk, turnus;
     private EditText typ;
     public ImageButton MHD;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
@@ -62,6 +62,7 @@ public class InformacieOVozidle extends AppCompatActivity {
 
         typ = findViewById(R.id.typ);
         stk = findViewById(R.id.stk);
+        turnus = findViewById(R.id.turnus);
         button = findViewById(R.id.button);
         buttonDelete = findViewById(R.id.buttonDelete);
         vozidlo = new Vozidlo();
@@ -77,9 +78,11 @@ public class InformacieOVozidle extends AppCompatActivity {
             public void onClick(View v) {
                 String gtyp = typ.getText().toString();
                 String gstk = stk.getText().toString();
+                String gturnus = turnus.getText().toString();
 
                 vozidlo.setTyp(gtyp);
                 vozidlo.setStk(gstk);
+                vozidlo.setTurnus(gturnus);
 
                 reff.setValue(vozidlo, String.valueOf(vozidlo.getEvc()));
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
@@ -92,6 +95,7 @@ public class InformacieOVozidle extends AppCompatActivity {
                 ecv.setText("");
                 typ.setText("");
                 stk.setText("");
+                turnus.setText("");
 
 
                 reff = FirebaseDatabase.getInstance().getReference()
@@ -117,9 +121,11 @@ public class InformacieOVozidle extends AppCompatActivity {
                 }else {
                     String styp = dataSnapshot.child("typ").getValue().toString();
                     String sstk = dataSnapshot.child("stk").getValue().toString();
+                    String sturnus = dataSnapshot.child("turnus").getValue().toString();
 
                     typ.setText(styp);
                     stk.setText(sstk);
+                    turnus.setText(sturnus);
                 }
             }
 

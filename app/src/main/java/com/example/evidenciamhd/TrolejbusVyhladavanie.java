@@ -40,8 +40,9 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
         list =  findViewById(R.id.listview);
         vozidloArrayList = new ArrayList<>();;
 
-        // Pass results to ListViewAdapter Class
-        adapter = new ListViewAdapter(this);
+        editsearch = findViewById(R.id.search);
+        editsearch.setOnQueryTextListener(this);
+
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -50,6 +51,9 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
                     vozidlo = ds.getValue(Vozidlo.class);
                     vozidloArrayList.add(vozidlo.getEvc());
                     System.out.println(vozidlo.getEvc());
+
+                    // Pass results to ListViewAdapter Class
+                    adapter = new ListViewAdapter(TrolejbusVyhladavanie.this);
 
                     list.setAdapter(adapter);
 
@@ -62,9 +66,8 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
             }
         });
 
+
         // Locate the EditText in listview_main.xml
-        editsearch = findViewById(R.id.search);
-        editsearch.setOnQueryTextListener(this);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,7 +93,8 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        String text = newText;
+
+        adapter.filter(newText);
         return false;
     }
 }

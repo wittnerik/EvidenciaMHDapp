@@ -21,8 +21,9 @@ public class ListViewAdapter extends BaseAdapter {
     public ListViewAdapter(Context context) {
         mContext = context;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<>();
-        this.arraylist.addAll(TrolejbusVyhladavanie.vozidloArrayList);
+        arraylist = new ArrayList<>();
+        arraylist.addAll(TrolejbusVyhladavanie.vozidloArrayList);
+        System.out.println("zaciatok " + arraylist.size());
     }
 
     public class ViewHolder {
@@ -32,6 +33,7 @@ public class ListViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         System.out.println("size: " + TrolejbusVyhladavanie.vozidloArrayList.size());
+        System.out.println("arraylist size: " + arraylist.size());
         return TrolejbusVyhladavanie.vozidloArrayList.size();
 
     }
@@ -67,11 +69,13 @@ public class ListViewAdapter extends BaseAdapter {
         TrolejbusVyhladavanie.vozidloArrayList.clear();
         if (charText.length() == 0) {
             TrolejbusVyhladavanie.vozidloArrayList.addAll(arraylist);
+            System.out.println("vsetky");
         } else {
             for (int wp : arraylist) {
                 String sp = String.valueOf(wp);
                 if (sp.toLowerCase(Locale.getDefault()).contains(charText)) {
                     TrolejbusVyhladavanie.vozidloArrayList.add(wp);
+
                 }
             }
         }
