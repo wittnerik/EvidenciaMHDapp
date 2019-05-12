@@ -34,8 +34,8 @@ import java.io.IOException;
 import java.util.Calendar;
 
 public class InformacieOVozidle extends AppCompatActivity {
-    private TextView ecv, stk, turnus;
-    private EditText typ;
+    private TextView ecv, stk, turnus, datum;
+    private EditText typ, stav;
     public ImageButton MHD;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     private Button button, buttonDelete;
@@ -63,6 +63,8 @@ public class InformacieOVozidle extends AppCompatActivity {
         typ = findViewById(R.id.typ);
         stk = findViewById(R.id.stk);
         turnus = findViewById(R.id.turnus);
+        stav = findViewById(R.id.stav);
+        datum = findViewById(R.id.datum);
         button = findViewById(R.id.button);
         buttonDelete = findViewById(R.id.buttonDelete);
         vozidlo = new Vozidlo();
@@ -78,11 +80,11 @@ public class InformacieOVozidle extends AppCompatActivity {
             public void onClick(View v) {
                 String gtyp = typ.getText().toString();
                 String gstk = stk.getText().toString();
-                String gturnus = turnus.getText().toString();
+                String gstav = stav.getText().toString();
 
                 vozidlo.setTyp(gtyp);
                 vozidlo.setStk(gstk);
-                vozidlo.setTurnus(gturnus);
+                vozidlo.setStav(gstav);
 
                 reff.setValue(vozidlo, String.valueOf(vozidlo.getEvc()));
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
@@ -92,12 +94,6 @@ public class InformacieOVozidle extends AppCompatActivity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ecv.setText("");
-                typ.setText("");
-                stk.setText("");
-                turnus.setText("");
-
-
                 reff = FirebaseDatabase.getInstance().getReference()
                         .child("Vozidlo").child(String.valueOf(mapka));
                 reff.removeValue();
@@ -122,10 +118,14 @@ public class InformacieOVozidle extends AppCompatActivity {
                     String styp = dataSnapshot.child("typ").getValue().toString();
                     String sstk = dataSnapshot.child("stk").getValue().toString();
                     String sturnus = dataSnapshot.child("turnus").getValue().toString();
+                    String sdatum = dataSnapshot.child("datum").getValue().toString();
+                    String sstav = dataSnapshot.child("stav").getValue().toString();
 
                     typ.setText(styp);
                     stk.setText(sstk);
                     turnus.setText(sturnus);
+                    datum.setText(sdatum);
+                    stav.setText(sstav);
                 }
             }
 

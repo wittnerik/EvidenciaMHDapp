@@ -2,12 +2,25 @@ package com.example.evidenciamhd;
 
 public class Vozidlo {
     private int evc;
-    private String typ;
-    private String stk;
-    private String turnus;
-
+    private String typ, stk, turnus, datum, stav;
     public String getTurnus() {
         return turnus;
+    }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public String getStav() {
+        return stav;
+    }
+
+    public void setStav(String stav) {
+        this.stav = stav;
     }
 
     public void setTurnus(String turnus) {
