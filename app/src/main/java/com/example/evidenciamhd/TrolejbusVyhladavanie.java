@@ -55,7 +55,7 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     vozidlo = ds.getValue(Vozidlo.class);
                     if(mhd==2) {
-                        if (vozidlo.getEvc()>300&&vozidlo.getEvc()<400){
+                        if (vozidlo.getEvc()>300&&vozidlo.getEvc()<400||vozidlo.getEvc()>=3428&&vozidlo.getEvc()<=3437){
                             vozidloArrayList.add(vozidlo.getEvc());
                         }
 
