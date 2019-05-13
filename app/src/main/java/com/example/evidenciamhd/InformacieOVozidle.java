@@ -81,10 +81,14 @@ public class InformacieOVozidle extends AppCompatActivity {
                 String gtyp = typ.getText().toString();
                 String gstk = stk.getText().toString();
                 String gstav = stav.getText().toString();
+                String gturnus = turnus.getText().toString();
+                String gdatum = datum.getText().toString();
 
                 vozidlo.setTyp(gtyp);
                 vozidlo.setStk(gstk);
                 vozidlo.setStav(gstav);
+                vozidlo.setTurnus(gturnus);
+                vozidlo.setDatum(gdatum);
 
                 reff.setValue(vozidlo, String.valueOf(vozidlo.getEvc()));
                 Toast.makeText(InformacieOVozidle.this, "Done", Toast.LENGTH_LONG).show();
