@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     private String[] EvcList;
     private DatabaseReference reff;
     private Vozidlo vozidlo;
+    private Button button;
     public static ArrayList<Integer> vozidloArrayList = new ArrayList<>();
 
     int mhd;
@@ -35,18 +37,29 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trolejbusy_vzhladavanie);
+        System.out.println("mhd    "+mhd);
 
         FirebaseApp.initializeApp(this);
         reff = FirebaseDatabase.getInstance().getReference("Vozidlo");
         vozidlo = new Vozidlo();
         list =  findViewById(R.id.listview);
+        button = findViewById(R.id.button2);
         vozidloArrayList = new ArrayList<>();;
 
         editsearch = findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
-        mhd = getIntent().getExtras().getInt("mhd");
+        mhd = getIntent().getExtras().getInt("mapka");
 
         System.out.println("mhd "+mhd);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
+                Intent intent = new Intent(TrolejbusVyhladavanie.this, OCR.class);
+                startActivity(intent);
+            }
+        });
 
 
         reff.addValueEventListener(new ValueEventListener() {

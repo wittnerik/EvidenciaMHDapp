@@ -1,6 +1,7 @@
 package com.example.evidenciamhd;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,7 @@ public class ListViewAdapter extends BaseAdapter {
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         TrolejbusVyhladavanie.vozidloArrayList.clear();
+        Log.d("vsetky", "ahoj");
         if (charText.length() == 0) {
             TrolejbusVyhladavanie.vozidloArrayList.addAll(arraylist);
             System.out.println("vsetky");

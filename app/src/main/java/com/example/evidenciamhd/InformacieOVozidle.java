@@ -170,7 +170,7 @@ public class InformacieOVozidle extends AppCompatActivity {
     private void selectImage() {
         final CharSequence[] items = { "Odfotiť", "Výber z galérie",
                 "Naspäť" };
-
+    getString(R.string.take_photo);
         AlertDialog.Builder builder = new AlertDialog.Builder(InformacieOVozidle.this);
         builder.setTitle("Pridaj fotku");
         builder.setItems(items, new DialogInterface.OnClickListener() {

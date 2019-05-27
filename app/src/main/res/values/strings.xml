@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Evidencia MHD</string>
     <string name="src">R.drawable.t</string>
+    <string name="take_photo">Odfotiť</string>
 </resources>

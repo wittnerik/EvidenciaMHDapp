@@ -26,9 +26,9 @@ public class VyberTypu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
-                int mhd=1;
+                int mapka=1;
                 Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
-                intent.putExtra("mhd",mhd);
+                intent.putExtra("mapka",mapka);
                 startActivity(intent);
             }
         });
@@ -37,9 +37,9 @@ public class VyberTypu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
-                int mhd=2;
+                int mapka=2;
                 Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
-                intent.putExtra("mhd",mhd);
+                intent.putExtra("mapka",mapka);
                 startActivity(intent);
             }
         });
@@ -48,9 +48,9 @@ public class VyberTypu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
-                int mhd=3;
+                int mapka=3;
                 Intent intent = new Intent(VyberTypu.this, TrolejbusVyhladavanie.class);
-                intent.putExtra("mhd",mhd);
+                intent.putExtra("mapka",mapka);
                 startActivity(intent);
             }
         });
