@@ -2,4 +2,6 @@
     <string name="app_name">Evidencia MHD</string>
     <string name="src">R.drawable.t</string>
     <string name="take_photo">Odfotiť</string>
+    <string name="ano">Áno</string>
+    <string name="nie">Nie</string>
 </resources>

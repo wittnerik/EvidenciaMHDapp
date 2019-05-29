@@ -10,15 +10,16 @@
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    
+
     <TextView
         android:id="@+id/text_view"
-        android:text="No text"
-        android:layout_alignParentBottom="true"
-        android:textColor="@android:color/white"
-        android:textSize="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:text="No text"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>
