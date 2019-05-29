@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -38,6 +36,8 @@ public class OCR extends AppCompatActivity {
     TextView txtResult;
     Button ano, nie;
 
+    TextRecognizer textRecognizer;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -61,10 +61,10 @@ public class OCR extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ocr);
         dialog = new Dialog(this);
-
+        dialog.setContentView(R.layout.pop_up);
         camera = findViewById(R.id.surfaceView);
 
-        TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
+        textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
         if (!textRecognizer.isOperational()) {
             Log.w("OCR", "Detector dependencies are not yet available");
         } else {
@@ -99,47 +99,59 @@ public class OCR extends AppCompatActivity {
                 @Override
                 public void surfaceDestroyed(SurfaceHolder holder) {
                     cameraSource.stop();
-
                 }
             });
-
-            textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
-
-                @Override
-                public void release() {
-                }
-
-                @Override
-                public void receiveDetections(Detector.Detections<TextBlock> detections) {
-                    items = detections.getDetectedItems();
-                    if (items.size() != 0) {
-
-                        StringBuilder stringBuilder = new StringBuilder();
-                        for (int i = 0; i < items.size(); ++i) {
-                            TextBlock item = items.valueAt(i);
-                            stringBuilder.append(item.getValue());
-                            stringBuilder.append("\n");
-                        }
-                        String vysledok = verification();
-                        Log.d("vysledok", "vysledok: " + vysledok);
-                        if (!vysledok.equals("failed")) {
-                            showPopUp();
-                        }
-
-                    }
-                }
-            });
+            startRecognizing();
         }
 
     }
 
-    public void showPopUp() {
+    private void startRecognizing() {
+        textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
 
+            @Override
+            public void release() {
+            }
+
+            @Override
+            public void receiveDetections(Detector.Detections<TextBlock> detections) {
+                SparseArray<TextBlock> items = detections.getDetectedItems();
+                if (!dialog.isShowing() && items.size() > 0) {
+
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < items.size(); i++) {
+                        TextBlock item = items.valueAt(i);
+                        stringBuilder.append(item.getValue());
+                        stringBuilder.append("\n");
+                    }
+                    textView.setText(stringBuilder);
+                    final String result = validateResult(items);
+                    Log.d("vysledok", "vysledok: " + result);
+                    if (result != null) {
+                        textView.post(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        showPopUp(result);
+                                    }
+                                }
+                        );
+                    }
+
+                }
+            }
+        });
+    }
+
+    private void stopRecognizing() {
+        textRecognizer.release();
+    }
+
+    public void showPopUp(final String result) {
         txtResult = dialog.findViewById(R.id.txtResultDrawable);
         ano = dialog.findViewById(R.id.anoButton);
         nie = dialog.findViewById(R.id.nieButton);
 
-        dialog.setContentView(R.layout.pop_up);
         txtResult.setText(result);
 
         ano.setOnClickListener(new View.OnClickListener() {
@@ -160,29 +172,27 @@ public class OCR extends AppCompatActivity {
                 }
             }
         });
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        // dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 
-    public String verification() {
-        StringBuilder stringBuilder = new StringBuilder();
+    public String validateResult(SparseArray<TextBlock> items) {
         for (int i = 0; i < items.size(); ++i) {
-            TextBlock item = items.valueAt(i);
-            stringBuilder.append(item.getValue());
-            Log.d("item", "item: " + stringBuilder);
-            if (Pattern.matches("[0-9]{3}", stringBuilder.toString())
-                    || stringBuilder.toString().equals("3428")
-                    || stringBuilder.toString().equals("3432")
-                    || stringBuilder.toString().equals("3434")
-                    || stringBuilder.toString().equals("3437")) {
-                result = stringBuilder.toString();
-                Log.d("result", "vysledok po podmienke : " + result);
-                return result;
+            String[] itemValues = items.valueAt(i).getValue().trim().split("\\s+");
+            for (String item : itemValues) {
+                Log.d("item", "item: " + item);
+                if (Pattern.matches("[0-9]{3}", item)) {
+                    return item;
+                }
             }
-            stringBuilder.setLength(0);
         }
-        return "failed";
+        return null;
     }
 
 
+    @Override
+    protected void onDestroy() {
+        stopRecognizing();
+        super.onDestroy();
+    }
 }
