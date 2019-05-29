@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 public class OCR extends AppCompatActivity {
 
     SurfaceView camera;
+    TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
     String result = "nic";
@@ -63,6 +64,7 @@ public class OCR extends AppCompatActivity {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.pop_up);
         camera = findViewById(R.id.surfaceView);
+        textView = findViewById(R.id.text_view);
 
         textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
         if (!textRecognizer.isOperational()) {
@@ -159,7 +161,7 @@ public class OCR extends AppCompatActivity {
             public void onClick(View v) {
                 int mapka = Integer.parseInt(result);
                 Intent intent = new Intent(OCR.this, InformacieOVozidle.class);
-                intent.putExtra("mapka", mapka);
+                intent.putExtra("mapka",mapka);
                 startActivity(intent);
             }
         });
