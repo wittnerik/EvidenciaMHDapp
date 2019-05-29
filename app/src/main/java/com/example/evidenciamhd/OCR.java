@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
 public class OCR extends AppCompatActivity {
 
     SurfaceView camera;
-    TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
     String result = "nic";
@@ -64,7 +63,6 @@ public class OCR extends AppCompatActivity {
         dialog = new Dialog(this);
 
         camera = findViewById(R.id.surfaceView);
-        textView = findViewById(R.id.text_view);
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
         if (!textRecognizer.isOperational()) {
@@ -108,7 +106,8 @@ public class OCR extends AppCompatActivity {
             textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
 
                 @Override
-                public void release() {}
+                public void release() {
+                }
 
                 @Override
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
@@ -121,10 +120,9 @@ public class OCR extends AppCompatActivity {
                             stringBuilder.append(item.getValue());
                             stringBuilder.append("\n");
                         }
-                        textView.setText(stringBuilder);
                         String vysledok = verification();
                         Log.d("vysledok", "vysledok: " + vysledok);
-                        if(!vysledok.equals("failed")){
+                        if (!vysledok.equals("failed")) {
                             showPopUp();
                         }
 
@@ -135,7 +133,7 @@ public class OCR extends AppCompatActivity {
 
     }
 
-    public void showPopUp(){
+    public void showPopUp() {
 
         txtResult = dialog.findViewById(R.id.txtResultDrawable);
         ano = dialog.findViewById(R.id.anoButton);
@@ -149,7 +147,7 @@ public class OCR extends AppCompatActivity {
             public void onClick(View v) {
                 int mapka = Integer.parseInt(result);
                 Intent intent = new Intent(OCR.this, InformacieOVozidle.class);
-                intent.putExtra("mapka",mapka);
+                intent.putExtra("mapka", mapka);
                 startActivity(intent);
             }
         });
@@ -171,8 +169,12 @@ public class OCR extends AppCompatActivity {
         for (int i = 0; i < items.size(); ++i) {
             TextBlock item = items.valueAt(i);
             stringBuilder.append(item.getValue());
-            Log.d("item", "item: "+ stringBuilder);
-            if (Pattern.matches("[0-9]{3}", stringBuilder.toString())) {
+            Log.d("item", "item: " + stringBuilder);
+            if (Pattern.matches("[0-9]{3}", stringBuilder.toString())
+                    || stringBuilder.toString().equals("3428")
+                    || stringBuilder.toString().equals("3432")
+                    || stringBuilder.toString().equals("3434")
+                    || stringBuilder.toString().equals("3437")) {
                 result = stringBuilder.toString();
                 Log.d("result", "vysledok po podmienke : " + result);
                 return result;
@@ -181,7 +183,6 @@ public class OCR extends AppCompatActivity {
         }
         return "failed";
     }
-
 
 
 }

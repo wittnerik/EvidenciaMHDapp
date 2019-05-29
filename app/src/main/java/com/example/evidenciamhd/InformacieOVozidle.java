@@ -48,17 +48,10 @@ public class InformacieOVozidle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.informacie_o_vozidle);
-        ecv=findViewById(R.id.ecv);
+        ecv = findViewById(R.id.ecv);
         MHD = findViewById(R.id.MHD);
         mapka = getIntent().getExtras().getInt("mapka");
         ecv.setText(String.valueOf(mapka));
-        MHD.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                selectImage();
-            }
-        });
 
         typ = findViewById(R.id.typ);
         stk = findViewById(R.id.stk);
@@ -109,16 +102,16 @@ public class InformacieOVozidle extends AppCompatActivity {
 
     }
 
-    public void setValues(){
+    public void setValues() {
         reff = FirebaseDatabase.getInstance().getReference().child("Vozidlo").child(String.valueOf(mapka));
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.child("evc").exists()){
+                if (!dataSnapshot.child("evc").exists()) {
                     Intent intent = new Intent(InformacieOVozidle.this, TrolejbusVyhladavanie.class);
                     startActivity(intent);
 
-                }else {
+                } else {
                     String styp = dataSnapshot.child("typ").getValue().toString();
                     String sstk = dataSnapshot.child("stk").getValue().toString();
                     String sturnus = dataSnapshot.child("turnus").getValue().toString();
@@ -140,7 +133,7 @@ public class InformacieOVozidle extends AppCompatActivity {
         });
     }
 
-    public void datePicker(){
+    public void datePicker() {
         stk = findViewById(R.id.stk);
         stk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,104 +153,11 @@ public class InformacieOVozidle extends AppCompatActivity {
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                month = month + 1 ;
+                month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
                 stk.setText(date);
             }
         };
     }
 
-    private void selectImage() {
-        final CharSequence[] items = { "Odfotiť", "Výber z galérie",
-                "Naspäť" };
-    getString(R.string.take_photo);
-        AlertDialog.Builder builder = new AlertDialog.Builder(InformacieOVozidle.this);
-        builder.setTitle("Pridaj fotku");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-
-
-                String userChoosenTask;
-                if (items[item].equals("Odfotiť")) {
-                    userChoosenTask ="Odfotiť";
-                        cameraIntent();
-
-                } else if (items[item].equals("Výber z galérie")) {
-                    userChoosenTask ="Výber z galérie";
-                        galleryIntent();
-
-                } else if (items[item].equals("Naspäť")) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
-    }
-
-    private void galleryIntent()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);//
-        startActivityForResult(Intent.createChooser(intent, "Vyber subor"),SELECT_FILE);
-    }
-
-    private void cameraIntent()
-    {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
-        }
-    }
-
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.PNG, 90, bytes);
-        MHD.setImageBitmap(Bitmap.createScaledBitmap( thumbnail, 120, 120, false));
-
-
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".pngx");
-
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        MHD.setImageBitmap(thumbnail);
-    }
-
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-
-        Bitmap bm=null;
-        if (data != null) {
-            try {
-                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        MHD.setImageBitmap(bm);
-    }
 }

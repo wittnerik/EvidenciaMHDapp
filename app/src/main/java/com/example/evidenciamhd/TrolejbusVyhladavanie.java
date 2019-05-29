@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -25,25 +29,39 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
     private ListView list;
     private ListViewAdapter adapter;
     private SearchView editsearch;
-    private String[] EvcList;
     private DatabaseReference reff;
     private Vozidlo vozidlo;
-    private Button button;
     public static ArrayList<Integer> vozidloArrayList = new ArrayList<>();
 
     int mhd;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.ocr:
+                startActivity(new Intent(this, OCR.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trolejbusy_vzhladavanie);
-        System.out.println("mhd    "+mhd);
+
+
 
         FirebaseApp.initializeApp(this);
         reff = FirebaseDatabase.getInstance().getReference("Vozidlo");
         vozidlo = new Vozidlo();
         list =  findViewById(R.id.listview);
-        button = findViewById(R.id.button2);
         vozidloArrayList = new ArrayList<>();;
 
         editsearch = findViewById(R.id.search);
@@ -51,16 +69,6 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
         mhd = getIntent().getExtras().getInt("mapka");
 
         System.out.println("mhd "+mhd);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // startActivity(new Intent(VyberTypu.this, TrolejbusVyhladavanie.class));
-                Intent intent = new Intent(TrolejbusVyhladavanie.this, OCR.class);
-                startActivity(intent);
-            }
-        });
-
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
@@ -110,10 +118,6 @@ public class TrolejbusVyhladavanie extends AppCompatActivity implements SearchVi
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 int mapka=vozidloArrayList.get(position).intValue();
-                System.out.println(mapka);
-
-                Toast.makeText(TrolejbusVyhladavanie.this, "" + vozidloArrayList.get(position), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(TrolejbusVyhladavanie.this, InformacieOVozidle.class);
                 intent.putExtra("mapka",mapka);
                 startActivity(intent);
